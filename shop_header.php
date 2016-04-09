@@ -1,6 +1,10 @@
 <?php
+
 function shop_header($title)
 {
+	if ($title !== 'Install Shop' && !file_exists("private/passwd")) {
+		header("Location: install.php");
+	}
 echo '<!doctype html>
 <html lang="fr">
 	<head>

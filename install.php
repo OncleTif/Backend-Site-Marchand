@@ -5,7 +5,7 @@ include("login_form.php");
 include("auth.php");
 
 
-shop_header("Install shop");
+shop_header("Install Shop");
 echo "<body>";
 if (!file_exists("private/passwd"))
 {
