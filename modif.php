@@ -2,7 +2,7 @@
 
 function add_user($num, $tab, $login, $passwd)
 {
-	header("Location: index.html");
+	header("Location: index.php");
 	$passwd = hash("whirlpool", $passwd);
 	$tab[$num]['passwd'] = $passwd;
 	$content = serialize($tab);

@@ -6,19 +6,25 @@ shop_header("Shop Acceuil");
 
 ?>
 
-<!-- <!doctype html>
-<html lang="fr">
-	<head>
-		<title>Shop Acceuil</title>
-		<meta charset="utf-8" />
-	</head>
-	<body> -->
 		<div>
 			<div class="category">
-				coucou
+				<?php
+					if (file_exists("private/category") === TRUE) {
+						$content = file_get_contents("private/category");
+						$tab = unserialize($content);
+						$i = 0;
+						echo "<form action='shop.php method='POST>";
+						while (isset($tab[$i])) {
+							echo "<input type='submit' name=".$tab[$i]['category']." value=".$tab[$i]['category']." /></ br>";
+							$i++;
+						}
+						echo "</form>";
+					}
+				?>
 			</div>
 			<div class="window">
-				coucou
+				<?php
+				?>
 			</div>
 			<div class="login">
 				<form action="login.php" method="POST">
