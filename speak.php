@@ -6,11 +6,11 @@ function add_msg($tab, $num, $login, $time, $msg)
 	$tab[$num]['time'] = $time;
 	$tab[$num]['msg'] = $msg;
 	$content = serialize($tab);
-	$fd = fopen("../private/chat", "w");
+	$fd = fopen("private/chat", "w");
 	// while (flock($fd, LOCK_EX) == FALSE) {
 	// 	;
 	// }
-	file_put_contents("../private/chat", $content);
+	file_put_contents("private/chat", $content);
 	// flock($fd, LOCK_UN);
 	fclose($fd);
 }
@@ -27,18 +27,18 @@ if (isset($_SESSION['loggued_on_user']) && $_SESSION['loggued_on_user'] !== "") 
 				</body>
 			</html>";
 	if (isset($_POST['msg']) === TRUE && $_POST['submit'] === "OK") {
-		if (file_exists("../private/chat") === FALSE) {
+		if (file_exists("private/chat") === FALSE) {
 			$tab = array();
-			if (file_exists("../private") === FALSE) {
-				mkdir("../private");
+			if (file_exists("private") === FALSE) {
+				mkdir("private");
 			}
 			add_msg($tab, 0, $_SESSION['loggued_on_user'], time(), $_POST['msg']);
 		} else {
-			$fd = fopen("../private/chat", "r");
+			$fd = fopen("private/chat", "r");
 			// while (flock($fd, LOCK_SH) === FALSE) {
 			// 	;
 			// }
-			$content = file_get_contents("../private/chat");
+			$content = file_get_contents("private/chat");
 			// flock($fd, LOCK_UN);
 			fclose($fd);
 			$tab = unserialize($content);

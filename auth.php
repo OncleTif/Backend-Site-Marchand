@@ -2,8 +2,8 @@
 
 function auth($login, $passwd)
 {
-	if (file_exists("../private/passwd") === TRUE) {
-		$content = file_get_contents("../private/passwd");
+	if (file_exists("private/passwd") === TRUE) {
+		$content = file_get_contents("private/passwd");
 		$tab = unserialize($content);
 		$i = 0;
 		while (isset($tab[$i])) {

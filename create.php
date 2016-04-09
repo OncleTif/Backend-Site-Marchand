@@ -2,25 +2,25 @@
 
 function add_user($num, $tab, $login, $passwd)
 {
-	header("Location: http://e2r7p1.42.fr:8080/j04/ex04/index.html");
+	header("Location: index.html");
 	$tab[$num]['login'] = $login;
 	$passwd = hash("whirlpool", $passwd);
 	$tab[$num]['passwd'] = $passwd;
 	$content = serialize($tab);
-	file_put_contents("../private/passwd", $content);
+	file_put_contents("private/passwd", $content);
 	echo "OK\n";
 }
 
-header("Location: http://e2r7p1.42.fr:8080/j04/ex04/create.html");
+header("Location: create.html");
 if ($_POST['passwd'] != NULL && $_POST['login'] != NULL && $_POST['submit'] === "OK") {
-	if (file_exists("../private/passwd") === FALSE) {
+	if (file_exists("private/passwd") === FALSE) {
 		$tab = array();
-		if (file_exists("../private") === FALSE) {
-			mkdir("../private");
+		if (file_exists("private") === FALSE) {
+			mkdir("private");
 		}
 		add_user(0, $tab, $_POST['login'], $_POST['passwd']);
 	} else {
-		$content = file_get_contents("../private/passwd");
+		$content = file_get_contents("private/passwd");
 		$tab = unserialize($content);
 		$i = 0;
 		while (isset($tab[$i])) {
