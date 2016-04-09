@@ -19,11 +19,11 @@ function del_item($tab, $num)
 	$new = array();
 	while (isset($tab[$i])) {
 		if ($i !== $num) {
-			$new[] = $tab[$i]
+			$new[] = $tab[$i];
 		}
 		$i++;
 	}
-	$content = serialize($tab);
+	$content = serialize($new);
 	if (file_put_contents("private/item", $content) === FALSE) {
 		echo "ERROR\n";
 	}
@@ -58,6 +58,7 @@ if ($_POST['item'] != NULL && $_POST['category'] != NULL && $_POST['price'] != N
 		$content = file_get_contents("private/item");
 		$tab = unserialize($content);
 		if (is_array($tab)) {
+			$i = 0;
 			while (isset($tab[$i])) {
 				if ($tab[$i]['item'] === $_POST['item']) {
 					del_item($tab, $i);
