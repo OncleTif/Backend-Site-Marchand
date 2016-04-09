@@ -13,11 +13,11 @@ if (file_exists("private/passwd")) {
 	if ($_SESSION["loggued_on_user"] && $_SESSION["is_admin"]) {
 		if (file_exists("private/item") === TRUE) {
 			$content = file_get_contents("private/item");
-			$tab = unserialize($content);
-			if (is_array($tab)) {
+			$tab_item = unserialize($content);
+			if (is_array($tab_item)) {
 				admin_left();
 				echo "<div class='window'>";
-				foreach($tab as $item) {
+				foreach($tab_item as $item) {
 					echo 	"<div><form action='add_item.php' method='POST'>";
 					foreach($item as $key => $val) {
 						if (is_array($val)) {
@@ -37,13 +37,14 @@ if (file_exists("private/passwd")) {
 				echo "<input type='text' name='number' value=''>";
 				echo "<input type='text' name='promotion' value=''>";
 				echo "<input type='submit' name='submit' value='OK' method='POST' />";
-				echo "</form></div></div>";
+				echo "</form></div>"
+				echo "</div>";
 				admin_right();
 			} else {
 				if (file_put_contents("private/item_corrupt".time(), $content) === FALSE) {
 					echo "ERROR\n";
 				}
-				$tab = array();
+				$tab_item = array();
 			}
 		}
 	} else {
