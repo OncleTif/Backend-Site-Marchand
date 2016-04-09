@@ -6,6 +6,7 @@ function add_user($num, $tab, $login, $passwd)
 	$tab[$num]['login'] = $login;
 	$passwd = hash("whirlpool", $passwd);
 	$tab[$num]['passwd'] = $passwd;
+	$tab[$num]['is_admin'] = 0;
 	$content = serialize($tab);
 	file_put_contents("private/passwd", $content);
 	echo "OK\n";
