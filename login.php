@@ -20,7 +20,7 @@ if (isset($_SESSION['loggued_on_user']) === FALSE) {
 			echo "ERROR\n";
 		}
 	} else {
-	echo "ERROR\n";
+		echo "ERROR\n";
 	}
 }
 
