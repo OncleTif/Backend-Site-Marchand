@@ -8,5 +8,5 @@ function login_form($action)
 		<br />
 		<input type="submit" name="submit" value="OK" />
 		</form>';
-		}
+}
 ?>
