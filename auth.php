@@ -13,12 +13,12 @@ function auth($login, $passwd)
 			$i++;
 		}
 		if (isset($tab[$i]) === TRUE) {
-			return (array(TRUE, $tab[$i]['is_admin']));
+			return (array("loggued_on_user" => $login, "is_admin" => $tab[$i]['is_admin']));
 		} else {
-			return array(FALSE, 0);
+			return (array("loggued_on_user" => "", "is_admin" => 0));
 		}
 	} else {
-		return array(FALSE, 0);
+			return (array("loggued_on_user" => "", "is_admin" => 0));
 	}
 }
 
