@@ -12,15 +12,9 @@ function add_user($num, $tab, $login, $passwd)
 	echo "OK\n";
 }
 
+	if (file_exists("private/passwd")) {
 header("Location: create.html");
 if ($_POST['passwd'] != NULL && $_POST['login'] != NULL && $_POST['submit'] === "OK") {
-	if (file_exists("private/passwd") === FALSE) {
-		$tab = array();
-		if (file_exists("private") === FALSE) {
-			mkdir("private");
-		}
-		add_user(0, $tab, $_POST['login'], $_POST['passwd']);
-	} else {
 		$content = file_get_contents("private/passwd");
 		$tab = unserialize($content);
 		$i = 0;
@@ -35,9 +29,12 @@ if ($_POST['passwd'] != NULL && $_POST['login'] != NULL && $_POST['submit'] === 
 		} else {
 			echo "ERROR\n";
 		}
-	}
+
 } else {
 	echo "ERROR\n";
 }
+}
+else
+	header("Location: install.php");
 
 ?>
