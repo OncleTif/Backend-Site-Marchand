@@ -13,22 +13,26 @@ shop_header("Shop Acceuil");
 		<meta charset="utf-8" />
 	</head>
 	<body> -->
-		<div class="category">
-		</div>
-		<div class="window">
-		</div>
-		<div class="login">
-			<form action="login.php" method="POST">
-				Identifiant: <input type="text" name="login" value="" />
+		<div>
+			<div class="category">
+				coucou
+			</div>
+			<div class="window">
+				coucou
+			</div>
+			<div class="login">
+				<form action="login.php" method="POST">
+					Identifiant: <input type="text" name="login" value="" />
+					<br />
+					Mot de passe: <input type="password" name="passwd" value="" />
+					<br />
+					<input type="submit" name="submit" value="OK" />
+				</form>
 				<br />
-				Mot de passe: <input type="password" name="passwd" value="" />
+				<a href="create.html">Cr&eacute;er un compte</a>
 				<br />
-				<input type="submit" name="submit" value="OK" />
-			</form>
-			<br />
-			<a href="create.html">Cr&eacute;er un compte</a>
-			<br />
-			<a href="modif.html">Modifier le mot de passe</a>
+				<a href="modif.html">Modifier le mot de passe</a>
+			</div>
 		</div>
 	</body>
 </html>
