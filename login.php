@@ -14,7 +14,7 @@ if (isset($_SESSION['loggued_on_user']) === FALSE) {
 						<br />
 						<form action='logout.php'>
 						<input type='submit' name='submit' value='D&eacute;connexion' method='POST' />
-						<form>
+						</form>
 					</body></html>";
 		} else {
 			echo "ERROR\n";
