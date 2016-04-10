@@ -3,7 +3,7 @@
 include "shop_header.php";
 include "login_form.php";
 
-shop_header("Shop Acceuil");
+shop_header("Shop Accueil");
 
 ?>
 
@@ -16,7 +16,7 @@ shop_header("Shop Acceuil");
 						$i = 0;
 						echo "<form action='shop.php method='POST>";
 						while (isset($tab[$i])) {
-							echo "<div class='category'><input size='30' type='submit' name=".$tab[$i]['category']." value=".$tab[$i]['category']." /></div>";
+							echo "<div class='category'><input type='submit' name=".$tab[$i]['category']." value=".$tab[$i]['category']." /></div>";
 							$i++;
 						}
 						echo "</form>";

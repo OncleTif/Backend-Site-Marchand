@@ -2,8 +2,9 @@
 
 function add_item($num, $tab, $POST)
 {
+	if ($POST['ref'] === '')
+		$tab['item'][$num]['ref'] = $POST['name'];
 	$tab['item'][$num]['name'] = $POST['name'];
-	$tab['item'][$num]['category'] = $POST['category'];
 	$tab['item'][$num]['price'] = $POST['price'];
 	$tab['item'][$num]['number'] = $POST['number'];
 	$tab['item'][$num]['category'] = array();
@@ -12,7 +13,6 @@ function add_item($num, $tab, $POST)
 			$tab['item'][$num]['category'][] = $cat;
 		}
 	}
-	print_r($tab['item'][$num]['category']);
 	$content = serialize($tab);
 	if (file_put_contents("private/item", $content) === FALSE) {
 		echo "ERROR file_put_contents add\n";
@@ -46,7 +46,7 @@ if ($_POST['name'] != NULL && $_POST['price'] != NULL && $_POST['number'] != NUL
 		if (is_array($tab)) {
 			$i = 0;
 			while (isset($tab['item'][$i])) {
-				if ($tab['item'][$i]['name'] === $_POST['name']) {
+				if ($tab['item'][$i]['ref'] === $_POST['ref']) {
 					break ;
 				}
 				$i++;
@@ -66,7 +66,7 @@ if ($_POST['name'] != NULL && $_POST['price'] != NULL && $_POST['number'] != NUL
 		if (is_array($tab)) {
 			$i = 0;
 			while (isset($tab['item'][$i])) {
-				if ($tab['item'][$i]['name'] === $_POST['name']) {
+				if ($tab['item'][$i]['ref'] === $_POST['ref']) {
 					del_item($tab, $i);
 					break ;
 				}

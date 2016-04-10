@@ -20,9 +20,9 @@ if (file_exists("private/passwd")) {
 				echo "<div class='window'>";
 				echo "<table><tr>";
 				echo "<td>nom</td>";
-				echo "<td>categorie</td>";
 				echo "<td>prix</td>";
-				echo "<td>nombre</td></tr>";
+				echo "<td>nombre</td>";
+				echo "<td>categorie</td></tr>";
 				foreach($tab['item'] as $item) {
 					echo 	"<tr><form action='add_item.php' method='POST'>";
 					foreach($item as $key => $val) {
@@ -37,24 +37,24 @@ if (file_exists("private/passwd")) {
 								echo " ></tr>";
 							}
 							echo "</table></td>";
-						} else {
-							echo "<td><input type='text' name=".$key." value=".$val." /></td>";
+						} else if ($key !== 'ref') {
+							echo "<td><input type='text' name=".$key." value=".$val."></td>";
 						}
 					}
-					echo 		"<td><input type='submit' name='submit' value='OK' method='POST' /></td>
-								<td><input type='submit' name='submit' value='DEL' method='POST' /></td>
-							</form></tr>";
+					echo "<td><input type='submit' name='submit' value='OK' method='POST' /></td>";
+					echo "<td><input type='submit' name='submit' value='DEL' method='POST' /></td>";
+					echo "<td><input type='text' name='ref' value=".$item['ref']." hidden></td></form></tr>";
 				}
 				echo "<tr><form action='add_item.php' method='POST'>";
 				echo "<td><input type='text' name='name' value='' /></td>";
+				echo "<td><input type='text' name='price' value='' /></td>";
+				echo "<td><input type='text' name='number' value='' /></td>";
 				echo "<td><table>";
 				foreach ($tab['cat'] as $cat) {
 					echo "<tr><td>'".$cat."'</td>";
 					echo "<td><input type='checkbox' name='".$cat."'></tr>";
 				}
 				echo "</table></td>";
-				echo "<td><input type='text' name='price' value='' /></td>";
-				echo "<td><input type='text' name='number' value='' /></td>";
 				echo "<td><input type='submit' name='submit' value='OK' method='POST' /></td>";
 				echo "</form></tr></table>";
 				echo "<br /><br /><br />";
@@ -62,7 +62,7 @@ if (file_exists("private/passwd")) {
 				echo "<td>nom</td>";
 				foreach($tab['cat'] as $cat) {
 					echo "<tr><form action='add_category.php' method='POST'>";
-					echo "<td><input type='text' name='category' value='".$cat."' /></td>";
+					echo "<td><input type='text' name='category' value='".$cat."' readonly/></td>";
 					echo "<td><input type='submit' name='submit' value='DEL' method='POST' /></td></form></tr>";
 				}
 				echo "<tr><form action='add_category.php' method='POST'>";
