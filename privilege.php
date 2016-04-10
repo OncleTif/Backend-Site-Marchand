@@ -13,10 +13,17 @@ if (!$SESSION["loggued_on_user"] && $_POST["login"] != "" && $_POST["passwd"] !=
 	$_SESSION = array_merge($_SESSION, auth($_POST["login"], $_POST["passwd"]));
 if ($_SESSION["loggued_on_user"])
 {
+
+
+	if (is_array($_POST["is_admin"]))
+	{
+include("modify_privileges.php");
+modify_privileges($_POST["is_admin"]);
+}
+
 $tab = unserialize(file_get_contents("private/passwd"));
 if (is_array($tab))
 {
-	print_r($_POST);
 	echo "<form action='". $_SERVER['REQUEST_URI'] . "' method='post'>";
 	echo "<table>";
 
