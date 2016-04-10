@@ -49,13 +49,22 @@ include("shop.php");
 				?>
 			</div>
 			<div class="login">
-				<a href="create.html">Cr&eacute;er un compte</a>
 				<br /><br />
 				<?php
 if ($_SESSION["loggued_on_user"] != "")
+{
 	echo "<p>Bonjour ". $_SESSION["loggued_on_user"]. "!</p>";
-	else
-				login_form($_SERVER["PHP_SELF"]); ?>
+	echo "<a href='modif_user.php' name='modifier le mot de passe'>Modifier le mot de passe</a><br />";
+	echo "<a href='delete_user.php' name='supprimer le compte'>Supprimer le compte</a>";
+
+
+	}
+else
+{
+	echo '<a href="create.html">Cr&eacute;er un compte</a>';
+	login_form($_SERVER["PHP_SELF"]);
+	}
+	?>
 			<div class="cart">
 				<p>Panier</p>
 <?php
