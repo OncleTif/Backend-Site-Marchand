@@ -21,7 +21,7 @@ if (file_exists("private/passwd")) {
 				echo "<table><tr>";
 				echo "<td>nom</td>";
 				echo "<td>prix</td>";
-				echo "<td>nombre</td>";
+				echo "<td>quantité</td>";
 				echo "<td>categorie</td></tr>";
 				foreach($tab['item'] as $ref_item => $item) {
 					echo 	"<tr><form action='add_item.php' method='POST'>";
@@ -37,6 +37,8 @@ if (file_exists("private/passwd")) {
 								echo " ></tr>";
 							}
 							echo "</table></td>";
+						} else if ($key === 'price' || $key === 'number') {
+							echo "<td><input type='number' name=".$key." value=".$val."></td>";
 						} else if ($key !== 'ref' && $key !== 'sold') {
 							echo "<td><input type='text' name=".$key." value=".$val."></td>";
 						}
@@ -47,8 +49,8 @@ if (file_exists("private/passwd")) {
 				}
 				echo "<tr><form action='add_item.php' method='POST'>";
 				echo "<td><input type='text' name='name' value='' /></td>";
-				echo "<td><input type='text' name='price' value='' /></td>";
-				echo "<td><input type='text' name='number' value='' /></td>";
+				echo "<td><input type='number' name='price' value='' /></td>";
+				echo "<td><input type='number' name='number' value='' /></td>";
 				echo "<td><table>";
 				foreach ($tab['cat'] as $ref_cat => $name) {
 					echo "<tr><td>'".$name."'</td>";
