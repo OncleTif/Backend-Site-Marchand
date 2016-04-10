@@ -11,6 +11,7 @@ include("item_form.php");
 
 		foreach ($items as $key => $item)
 		{
+		if (!isset($_SESSION["category"]) || in_array($_SESSION["category"], $item["cat"]))
 item_form($key, $item, $_SERVER['PHP_SELF']);
 		}
 	}
