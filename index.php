@@ -2,7 +2,6 @@
 session_start();
 include "shop_header.php";
 include "login_form.php";
-include "get_items.php";
 include "modif_cart.php";
 include "add_to_cart.php";
 include "archive_cart.php";
