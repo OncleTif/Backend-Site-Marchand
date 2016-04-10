@@ -10,6 +10,9 @@ $items = $tab["item"];
 $_SESSION["cart"]["total"] = $_SESSION["cart"]["total"] - $_SESSION["cart"]["items"][$input["ref"]]["sub_total"];
 	$_SESSION["cart"]["items"][$input['ref']]['name'] = $items[$input['ref']]["name"];
 	$_SESSION["cart"]["items"][$input['ref']]['price'] = $items[$input['ref']]["price"];
+	if ($_SESSION["cart"]["items"][$input['ref']]['quantity'] + $input['quantity'] > $items[$input['ref']]["number"])
+	$_SESSION["cart"]["items"][$input['ref']]['quantity'] = $items[$input['ref']]['number'];
+	else
 	$_SESSION["cart"]["items"][$input['ref']]['quantity'] = $_SESSION["cart"]["items"][$input['ref']]['quantity'] + $input['quantity'];
 	$_SESSION["cart"]["items"][$input['ref']]['price'] = $items[$input['ref']]["price"];
 	$_SESSION["cart"]["items"][$input['ref']]['sub_total'] = $items[$input['ref']]["price"] * $_SESSION["cart"]["items"][$input['ref']]["quantity"];
