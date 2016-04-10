@@ -26,11 +26,20 @@ if (file_exists("private/passwd")) {
 				foreach($tab['item'] as $item) {
 					echo 	"<tr><form action='add_item.php' method='POST'>";
 					foreach($item as $key => $val) {
-						// if (is_array($val)) {
-						//
-						// } else {
+						if (is_array($val)) {
+							echo "<td><table>";
+							foreach ($tab['cat'] as $cat) {
+								echo "<tr><td>'".$cat."'</td>";
+								echo "<td><input type='checkbox' name='".$cat."'";
+								if (in_array($cat, $val)) {
+									echo " checked";
+								}
+								echo " ></tr>";
+							}
+							echo "</table></td>";
+						} else {
 							echo "<td><input type='text' name=".$key." value=".$val." /></td>";
-						// }
+						}
 					}
 					echo 		"<td><input type='submit' name='submit' value='OK' method='POST' /></td>
 								<td><input type='submit' name='submit' value='DEL' method='POST' /></td>
@@ -38,7 +47,12 @@ if (file_exists("private/passwd")) {
 				}
 				echo "<tr><form action='add_item.php' method='POST'>";
 				echo "<td><input type='text' name='name' value='' /></td>";
-				echo "<td><input type='text' name='category' value='' /></td>";
+				echo "<td><table>";
+				foreach ($tab['cat'] as $cat) {
+					echo "<tr><td>'".$cat."'</td>";
+					echo "<td><input type='checkbox' name='".$cat."'></tr>";
+				}
+				echo "</table></td>";
 				echo "<td><input type='text' name='price' value='' /></td>";
 				echo "<td><input type='text' name='number' value='' /></td>";
 				echo "<td><input type='submit' name='submit' value='OK' method='POST' /></td>";
@@ -49,7 +63,7 @@ if (file_exists("private/passwd")) {
 				foreach($tab['cat'] as $cat) {
 					echo "<tr><form action='add_category.php' method='POST'>";
 					echo "<td><input type='text' name='category' value='".$cat."' /></td>";
-					echo "<td><input type='submit' name='submit' value='DEL' method='POST' /></td></from></tr>";
+					echo "<td><input type='submit' name='submit' value='DEL' method='POST' /></td></form></tr>";
 				}
 				echo "<tr><form action='add_category.php' method='POST'>";
 				echo "<td><input type='text' name='category' value='' /></td>";

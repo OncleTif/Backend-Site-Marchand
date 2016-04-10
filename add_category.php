@@ -26,8 +26,6 @@ function del_category($tab, $num)
 	}
 }
 
-echo "POST: ".$_POST['category']." ".$_POST['submit']."\n";
-
 if ($_POST['category'] != NULL && $_POST['submit'] === "OK") {
 	$i = 0;
 	if (file_exists("private/item") === FALSE) {
@@ -51,14 +49,14 @@ if ($_POST['category'] != NULL && $_POST['submit'] === "OK") {
 	}
 	add_category($i, $tab, $_POST['category']);
 } else if ($_POST['category'] != NULL && $_POST['submit'] === "DEL") {
-	if (file_exists("private/category") === TRUE) {
-		$content = file_get_contents("private/category");
+	if (file_exists("private/item") === TRUE) {
+		$content = file_get_contents("private/item");
 		$tab = unserialize($content);
 		if (is_array($tab)) {
 			$i = 0;
 			while (isset($tab['cat'][$i])) {
 				if ($tab['cat'][$i] === $_POST['category']) {
-					del_item($tab, $i);
+					del_category($tab, $i);
 					break ;
 				}
 				$i++;
@@ -66,6 +64,5 @@ if ($_POST['category'] != NULL && $_POST['submit'] === "OK") {
 		}
 	}
 } else {
-	echo "marche pas\n";
 	echo "ERROR\n";
 }
