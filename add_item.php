@@ -1,15 +1,14 @@
 <?php
 
-function add_item($num, $tab, $item, $category, $price, $number, $promotion)
+function add_item($num, $tab, $name, $category, $price, $number)
 {
-	$tab[$num]['item'] = $item;
-	$tab[$num]['category'] = $category;
-	$tab[$num]['price'] = $price;
-	$tab[$num]['number'] = $number;
-	$tab[$num]['promotion'] = $promotion;
+	$tab['item'][$num]['name'] = $name;
+	$tab['item'][$num]['category'] = $category;
+	$tab['item'][$num]['price'] = $price;
+	$tab['item'][$num]['number'] = $number;
 	$content = serialize($tab);
 	if (file_put_contents("private/item", $content) === FALSE) {
-		echo "ERROR\n";
+		echo "ERROR file_put_contents add\n";
 	}
 }
 
@@ -17,50 +16,50 @@ function del_item($tab, $num)
 {
 	$i = 0;
 	$new = array();
-	while (isset($tab[$i])) {
+	while (isset($tab['item'][$i])) {
 		if ($i !== $num) {
-			$new[] = $tab[$i];
+			$new[] = $tab['item'][$i];
 		}
 		$i++;
 	}
-	$content = serialize($new);
+	$tab['item'] = $new;
+	$content = serialize($tab);
 	if (file_put_contents("private/item", $content) === FALSE) {
-		echo "ERROR\n";
+		echo "ERROR file_put_contents del\n";
 	}
 }
 
-if ($_POST['item'] != NULL && $_POST['category'] != NULL && $_POST['price'] != NULL
+if ($_POST['name'] != NULL && $_POST['category'] != NULL && $_POST['price'] != NULL
 	&& $_POST['number'] != NULL && $_POST['submit'] === "OK") {
-	$i = 0;
 	if (file_exists("private/item") === FALSE) {
-		$tab = array();
+		$tab = array('cat' => array(), 'item' => array());
 	} else {
 		$content = file_get_contents("private/item");
 		$tab = unserialize($content);
 		if (is_array($tab)) {
-			while (isset($tab[$i])) {
-				if ($tab[$i]['item'] === $_POST['item']) {
+			$i = 0;
+			while (isset($tab['item'][$i])) {
+				if ($tab['item'][$i]['name'] === $_POST['name']) {
 					break ;
 				}
 				$i++;
 			}
 		} else {
 			if (file_put_contents("private/item_corrupt".time(), $content) === FALSE) {
-				echo "ERROR\n";
+				echo "ERROR file_put_contents\n";
 			}
-			$tab = array();
+			$tab = array('cat' => array(), 'item' => array());
 		}
 	}
-	add_item($i, $tab, $_POST['item'], $_POST['category'], $_POST['price'],
-		$_POST['number'], $_POST['promotion']);
-} else if ($_POST['item'] != NULL && $_POST['submit'] === "DEL") {
+	add_item($i, $tab, $_POST['name'], $_POST['category'], $_POST['price'], $_POST['number']);
+} else if ($_POST['name'] != NULL && $_POST['submit'] === "DEL") {
 	if (file_exists("private/item") === TRUE) {
 		$content = file_get_contents("private/item");
 		$tab = unserialize($content);
 		if (is_array($tab)) {
 			$i = 0;
-			while (isset($tab[$i])) {
-				if ($tab[$i]['item'] === $_POST['item']) {
+			while (isset($tab['item'][$i])) {
+				if ($tab['item'][$i]['name'] === $_POST['name']) {
 					del_item($tab, $i);
 					break ;
 				}
@@ -69,7 +68,10 @@ if ($_POST['item'] != NULL && $_POST['category'] != NULL && $_POST['price'] != N
 		}
 	}
 } else {
-	echo "ERROR\n";
+	foreach($_POST as $key => $val) {
+		echo $key." => ".$val."<br />";
+	}
+	echo "ERROR post\n";
 }
 
 ?>

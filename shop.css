@@ -16,6 +16,14 @@
 	flex-grow: 1;
 }
 
+.window table {
+	border-collapse: collapse;
+}
+
+.window td {
+	border: 1px solid black;
+}
+
 .window {
 	order: 2;
 	flex-grow: 70;
