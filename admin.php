@@ -1,8 +1,10 @@
 <?php
-
+session_start();
+include("login_form.php");
 include("shop_header.php");
 include("admin_pane.php");
 shop_header("Shop Administration");
+
 
 if (isset($_POST['usr_id']) && isset($_POST['cmd_id'])) {
 	$tab = unserialize(file_get_contents("private/passwd"));
@@ -13,9 +15,18 @@ if (isset($_POST['usr_id']) && isset($_POST['cmd_id'])) {
 }
 
 ?>
-<?php admin_left() ?>
-<div class='window'>
-	<?php
+<?php
+if (!$SESSION["loggued_on_user"] && $_POST["login"] != "" && $_POST["passwd"] != "")
+   $_SESSION = array_merge($_SESSION, auth($_POST["login"], $_POST["passwd"]));
+
+
+
+ if ($_SESSION["loggued_on_user"])
+	   {
+
+admin_left();
+echo "<div class='window'>";
+
 		$tab = unserialize(file_get_contents("private/passwd"));
 		if (is_array($tab)) {
 			foreach($tab as $id_usr => $user) {
@@ -64,6 +75,9 @@ if (isset($_POST['usr_id']) && isset($_POST['cmd_id'])) {
 				}
 			}
 		}
-	?>
-</div>
-<?php admin_right() ?>
+echo "</div>";
+ admin_right() ;
+ }
+ else
+login_form($_SERVER['PHP_SELF']);
+?>

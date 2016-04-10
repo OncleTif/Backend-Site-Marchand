@@ -42,7 +42,6 @@ function del_cat($tab, $ref) {
 		$tab['item'][$j]['cat'] = $new_cat;
 		$j++;
 	}
-	print_r($tab);
 	$content = serialize($tab);
 	if (file_put_contents("private/item", $content) === FALSE) {
 		echo "ERROR file_put_contents del\n";
@@ -87,10 +86,7 @@ $tab = unserialize(file_get_contents("private/item"));
 add_item($tab, array('ref' => 2, 'name' => 'clou', 'price' => 2, 'number' => 1000, 'petit outillage' => 1, 'visserie' => 1));
 $tab = unserialize(file_get_contents("private/item"));
 add_item($tab, array('ref' => 3, 'name' => 'marteau', 'price' => 60, 'number' => 7, 'outils' => 1));
-$tab = unserialize(file_get_contents("private/item"));
 
 // del_cat($tab, 0);
-$tab = unserialize(file_get_contents("private/item"));
-print_r($tab);
 
 ?>
