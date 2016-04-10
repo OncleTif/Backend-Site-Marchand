@@ -8,7 +8,7 @@ function buy_cart()
 		{
 			foreach($tab as $id => $user)
 			{
-				if ($user["name"] === $_SESSION["loggued_on_name"])
+				if ($user["login"] === $_SESSION["loggued_on_user"])
 					$tab[$id]["commands"][]["cart"] = $_SESSION["cart"];
 				unset($tab[$id]["cart"]);
 				if (file_put_contents("private/passwd", serialize($tab)))
