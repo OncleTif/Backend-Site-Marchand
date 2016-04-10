@@ -1,11 +1,12 @@
 <?php
-
+include "home_form.php";
 function admin_left()
 {
 	echo	"<body>
 				<div class='container'>
-					<div class='category_list'>
-						<form action='privilege.php'>
+					<div class='category_list'>";
+home_form("index.php");
+	echo					"<form action='privilege.php'>
 							<input type='submit' name='Modification Utilisateurs' value='Modification Utilisateurs' method='POST' />
 						</form>
 						<form action='item.php'>
