@@ -1,6 +1,8 @@
 <?php
 function modify_privileges($tab_admin)
 {
+	if (!is_array($tab_admin))
+		$tab_admin = array();
 $tab = unserialize(file_get_contents("private/passwd"));
 if (is_array($tab))
 {

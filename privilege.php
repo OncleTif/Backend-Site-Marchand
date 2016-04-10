@@ -15,7 +15,7 @@ if ($_SESSION["loggued_on_user"])
 {
 
 
-	if (is_array($_POST["is_admin"]))
+	if ($_POST["form"] === "is_admin")
 	{
 include("modify_privileges.php");
 modify_privileges($_POST["is_admin"]);
@@ -41,6 +41,7 @@ foreach ($tab as $user)
 	echo "</tr>";
 }
 	echo "</table>";
+echo "<input type='hidden' name='form' value='is_admin' />";
 echo "<input type='submit' value='valider' /></form>";
 }
 else
