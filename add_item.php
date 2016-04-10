@@ -1,30 +1,29 @@
 <?php
 
-function add_item($num, $tab, $POST)
-{
-	if ($POST['ref'] === '')
-		$tab['item'][$num]['ref'] = $POST['name'];
-	$tab['item'][$num]['name'] = $POST['name'];
-	$tab['item'][$num]['price'] = $POST['price'];
-	$tab['item'][$num]['number'] = $POST['number'];
-	$tab['item'][$num]['category'] = array();
-	foreach($tab['cat'] as $cat) {
-		if (array_key_exists($cat, $POST)) {
-			$tab['item'][$num]['category'][] = $cat;
+function add_item($tab, $POST) {
+	$tab['item'][$POST['ref']]['name'] = $POST['name'];
+	$tab['item'][$POST['ref']]['price'] = $POST['price'];
+	$tab['item'][$POST['ref']]['number'] = $POST['number'];
+	if (isset($tab['item'][$POST['ref']]['sold']) === FALSE)
+		$tab['item'][$POST['ref']]['sold'] = 0;
+	$tab['item'][$POST['ref']]['cat'] = array();
+	foreach($tab['cat'] as $ref => $value) {
+		if (array_key_exists($value, $POST)) {
+			$tab['item'][$POST['ref']]['cat'][] = $ref;
 		}
 	}
-	$content = serialize($tab);
-	if (file_put_contents("private/item", $content) === FALSE) {
-		echo "ERROR file_put_contents add\n";
+	echo "\n";
+	print_r($tab);
+	if (file_put_contents("private/item", serialize($tab)) === FALSE) {
+		echo "ERROR\n";
 	}
 }
 
-function del_item($tab, $num)
-{
-	$i = 0;
+function del_item($tab, $ref) {
 	$new = array();
-	while (isset($tab['item'][$i])) {
-		if ($i !== $num) {
+	$i = 0;
+	while ($i < count($tab['item'])) {
+		if ($i != $ref) {
 			$new[] = $tab['item'][$i];
 		}
 		$i++;
@@ -36,49 +35,36 @@ function del_item($tab, $num)
 	}
 }
 
-if ($_POST['name'] != NULL && $_POST['price'] != NULL && $_POST['number'] != NULL
-	&& $_POST['submit'] === "OK") {
-	if (file_exists("private/item") === FALSE) {
+if ($_POST['name'] != NULL && $_POST['price'] != NULL && $_POST['number'] != NULL && $_POST['submit'] === "OK") {
+	if (file_exists('private/item') === FALSE) {
 		$tab = array('cat' => array(), 'item' => array());
+		$_POST['ref'] = 0;
 	} else {
-		$content = file_get_contents("private/item");
-		$tab = unserialize($content);
+		$tab = unserialize(file_get_contents("private/item"));
 		if (is_array($tab)) {
-			$i = 0;
-			while (isset($tab['item'][$i])) {
-				if ($tab['item'][$i]['ref'] === $_POST['ref']) {
-					break ;
-				}
-				$i++;
-			}
+			if (isset($_POST['ref']) === FALSE)
+				$_POST['ref'] = count($tab['item']);
 		} else {
 			if (file_put_contents("private/item_corrupt".time(), $content) === FALSE) {
-				echo "ERROR file_put_contents\n";
+				echo "ERROR\n";
 			}
 			$tab = array('cat' => array(), 'item' => array());
+			$_POST['ref'] = 0;
 		}
+		print_r($_POST);
+		add_item($tab, $_POST);
 	}
-	add_item($i, $tab, $_POST);
-} else if ($_POST['name'] != NULL && $_POST['submit'] === "DEL") {
-	if (file_exists("private/item") === TRUE) {
-		$content = file_get_contents("private/item");
-		$tab = unserialize($content);
+
+} else if ($_POST['ref'] && $_POST['submit'] === 'DEL') {
+	if (file_exists('private/item') === TRUE) {
+		$tab = unserialize(file_get_contents("private/item"));
 		if (is_array($tab)) {
-			$i = 0;
-			while (isset($tab['item'][$i])) {
-				if ($tab['item'][$i]['ref'] === $_POST['ref']) {
-					del_item($tab, $i);
-					break ;
-				}
-				$i++;
-			}
+			del_item($tab, $_POST['ref']);
+		}
+		if (file_put_contents("private/item", serialize($tab)) === FALSE) {
+			echo "ERROR\n";
 		}
 	}
-} else {
-	foreach($_POST as $key => $val) {
-		echo $key." => ".$val."<br />";
-	}
-	echo "ERROR post\n";
 }
 
 ?>
