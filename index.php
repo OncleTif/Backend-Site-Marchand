@@ -27,6 +27,7 @@ shop_header("Shop Accueil");
 			<div class="window">
 				<?php
 include("shop.php");
+include("print_cart.php");
 				?>
 			</div>
 			<div class="login">
