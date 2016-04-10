@@ -5,7 +5,7 @@ function admin_left()
 	echo	"<body>
 				<div class='container'>
 					<div class='category_list'>
-						<form action='user.php'>
+						<form action='privilege.php'>
 							<input type='submit' name='Modification Utilisateurs' value='Modification Utilisateurs' method='POST' />
 						</form>
 						<form action='item.php'>
