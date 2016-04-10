@@ -1,10 +1,17 @@
 <?php
-
+session_start();
 include "shop_header.php";
 include "login_form.php";
 include "get_items.php";
+include "modif_cart.php";
 
 shop_header("Shop Accueil");
+if ($_POST["form"] === "modif_cart")
+modif_cart($_POST);
+
+
+
+
 
 ?>
 	<body>
@@ -27,6 +34,7 @@ shop_header("Shop Accueil");
 			<div class="window">
 				<?php
 include("shop.php");
+var_dump($_SESSION);
 include("print_cart.php");
 				?>
 			</div>
