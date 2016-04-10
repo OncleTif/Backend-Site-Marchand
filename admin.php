@@ -1,6 +1,7 @@
 <?php
 
 include("shop_header.php");
+include("admin_pane.php");
 shop_header("Shop Administration");
 
 ?>
