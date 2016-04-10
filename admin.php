@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("login_form.php");
+include("auth.php");
 include("shop_header.php");
 include("admin_pane.php");
 shop_header("Shop Administration");
