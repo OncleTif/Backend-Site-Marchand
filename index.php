@@ -9,6 +9,8 @@ include "archive_cart.php";
 include "archive_form.php";
 include "auth.php";
 include "home_form.php";
+include "buy_form.php";
+include "buy_cart.php";
 
 if (!$_SESSION["loggued_on_user"] && $_POST["login"] != "" && $_POST["passwd"] != "") {
   $_SESSION = array_merge($_SESSION, auth($_POST["login"], $_POST["passwd"]));
@@ -23,7 +25,9 @@ modif_cart($_POST);
 else if ($_POST["form"] === "add_to_cart")
 	add_to_cart($_POST);
 else if ($_POST["form"] === "archive_cart")
-	archive_cart($_POST);
+	archive_cart();
+else if ($_POST["form"] === "buy_cart")
+	buy_cart();
 else if ($_POST["form"] === "home")
 	unset($_SESSION["category"]);
 
@@ -70,9 +74,12 @@ else
 				if ($_SESSION["loggued_on_user"] != "")
 {
 archive_form($_SERVER['PHP_SELF']);
-
 }
 				 include("print_cart.php");
+				if ($_SESSION["loggued_on_user"] != "")
+{
+buy_form($_SERVER['PHP_SELF']);
+}
 				?>
 			</div>
 			</div>
