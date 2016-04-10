@@ -4,10 +4,13 @@ include "shop_header.php";
 include "login_form.php";
 include "get_items.php";
 include "modif_cart.php";
+include "add_to_cart.php";
 
 shop_header("Shop Accueil");
 if ($_POST["form"] === "modif_cart")
 modif_cart($_POST);
+else if ($_POST["form"] === "add_to_cart")
+	add_to_cart($_POST);
 
 
 
@@ -34,14 +37,17 @@ modif_cart($_POST);
 			<div class="window">
 				<?php
 include("shop.php");
-var_dump($_SESSION);
-include("print_cart.php");
 				?>
 			</div>
 			<div class="login">
 				<a href="create.html">Cr&eacute;er un compte</a>
 				<br /><br />
 				<?php login_form("login.php"); ?>
+			<div class="cart">
+				<p>Panier</p>
+				<br /><br />
+				<?php include("print_cart.php");i ?>
+			</div>
 			</div>
 		</div>
 	</body>
