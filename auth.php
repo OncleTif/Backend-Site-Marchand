@@ -14,7 +14,7 @@ function auth($login, $passwd)
 				$i++;
 			}
 			if (isset($tab[$i]) === TRUE) {
-				return (array("loggued_on_user" => $login, "is_admin" => $tab[$i]['is_admin']));
+				return (array("loggued_on_user" => $login, "is_admin" => $tab[$i]['is_admin'], "cart" => $tab[$i]["cart"]));
 			}
 		}
 	}
