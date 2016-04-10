@@ -57,7 +57,8 @@ if ($_SESSION["loggued_on_user"] != "")
 	echo "<p>Bonjour ". $_SESSION["loggued_on_user"]. "!</p>";
 	echo "<a href='logout.php' name='se deconnecter'>Se déconnecter</a><br />";
 	echo "<a href='modif_user.php' name='modifier le mot de passe'>Modifier le mot de passe</a><br />";
-	echo "<a href='delete_user.php' name='supprimer le compte'>Supprimer le compte</a>";
+	echo "<a href='delete_user.php' name='supprimer le compte'>Supprimer le compte</a><br />";
+	echo "<a href='historiq_command.php' name='Status des commandes'>Status des commandes</a>";
 	if ($_SESSION["is_admin"])
 		echo "<br /><a href='admin.php' name='administrer le site'>Administrer le site</a>";
 
