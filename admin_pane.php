@@ -6,11 +6,11 @@ function admin_left()
 				<div class='container'>
 					<div class='category_list'>";
 home_form("index.php");
-	echo					"<form action='privilege.php'>
-							<input type='submit' name='Modification Utilisateurs' value='Modification Utilisateurs' method='POST' />
+	echo					"<form action='privilege.php' method='post'>
+							<input type='submit' name='Modification Utilisateurs' value='Modification Utilisateurs' />
 						</form>
-						<form action='item.php'>
-							<input type='submit' name='Modification Articles' value='Modification Articles' method='POST' />
+						<form action='item.php' method='post'>
+							<input type='submit' name='Modification Articles' value='Modification Articles' />
 						</form>
 					</div>";
 }
