@@ -1,11 +1,18 @@
 <?php
 
-function add_item($num, $tab, $name, $category, $price, $number)
+function add_item($num, $tab, $POST)
 {
-	$tab['item'][$num]['name'] = $name;
-	$tab['item'][$num]['category'] = $category;
-	$tab['item'][$num]['price'] = $price;
-	$tab['item'][$num]['number'] = $number;
+	$tab['item'][$num]['name'] = $POST['name'];
+	$tab['item'][$num]['category'] = $POST['category'];
+	$tab['item'][$num]['price'] = $POST['price'];
+	$tab['item'][$num]['number'] = $POST['number'];
+	$tab['item'][$num]['category'] = array();
+	foreach($tab['cat'] as $cat) {
+		if (array_key_exists($cat, $POST)) {
+			$tab['item'][$num]['category'][] = $cat;
+		}
+	}
+	print_r($tab['item'][$num]['category']);
 	$content = serialize($tab);
 	if (file_put_contents("private/item", $content) === FALSE) {
 		echo "ERROR file_put_contents add\n";
@@ -29,8 +36,8 @@ function del_item($tab, $num)
 	}
 }
 
-if ($_POST['name'] != NULL && $_POST['category'] != NULL && $_POST['price'] != NULL
-	&& $_POST['number'] != NULL && $_POST['submit'] === "OK") {
+if ($_POST['name'] != NULL && $_POST['price'] != NULL && $_POST['number'] != NULL
+	&& $_POST['submit'] === "OK") {
 	if (file_exists("private/item") === FALSE) {
 		$tab = array('cat' => array(), 'item' => array());
 	} else {
@@ -51,7 +58,7 @@ if ($_POST['name'] != NULL && $_POST['category'] != NULL && $_POST['price'] != N
 			$tab = array('cat' => array(), 'item' => array());
 		}
 	}
-	add_item($i, $tab, $_POST['name'], $_POST['category'], $_POST['price'], $_POST['number']);
+	add_item($i, $tab, $_POST);
 } else if ($_POST['name'] != NULL && $_POST['submit'] === "DEL") {
 	if (file_exists("private/item") === TRUE) {
 		$content = file_get_contents("private/item");
