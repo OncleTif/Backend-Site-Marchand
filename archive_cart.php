@@ -9,6 +9,7 @@ function archive_cart()
 			foreach($tab as $id => $user)
 			{
 				if ($user["login"] === $_SESSION["loggued_on_user"])
+				{
 					$tab[$id]["cart"] = $_SESSION["cart"];
 				if (file_put_contents("private/passwd", serialize($tab)))
 				{
@@ -17,6 +18,7 @@ function archive_cart()
 				}
 			}
 		}
+	}
 	}
 					echo "<p class=error>Erreur a l'archivage du panier</p>";
 					return;
