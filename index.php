@@ -2,11 +2,12 @@
 
 include "shop_header.php";
 include "login_form.php";
+include "get_items.php";
 
 shop_header("Shop Accueil");
 
 ?>
-
+	<body>
 		<div class="container">
 			<div class="category_list">
 				<?php
@@ -25,6 +26,7 @@ shop_header("Shop Accueil");
 			</div>
 			<div class="window">
 				<?php
+include("shop.php");
 				?>
 			</div>
 			<div class="login">
