@@ -17,8 +17,8 @@ function admin_left()
 function admin_right()
 {
 	echo				"<div class='login'>
-							<form action='logout.php'>
-								<input type='submit' name='submit' value='D&eacute;connexion' method='POST' />
+							<form action='logout.php' method='POST'>
+								<input type='submit' name='submit' value='D&eacute;connexion' />
 							</form>
 						</div>
 					</div>

@@ -23,15 +23,15 @@ if (file_exists("private/passwd")) {
 				echo "<td>prix</td>";
 				echo "<td>nombre</td>";
 				echo "<td>categorie</td></tr>";
-				foreach($tab['item'] as $ref => $item) {
+				foreach($tab['item'] as $ref_item => $item) {
 					echo 	"<tr><form action='add_item.php' method='POST'>";
 					foreach($item as $key => $val) {
 						if (is_array($val)) {
 							echo "<td><table>";
-							foreach ($tab['cat'] as $ref => $name) {
+							foreach ($tab['cat'] as $ref_cat => $name) {
 								echo "<tr><td>'".$name."'</td>";
-								echo "<td><input type='checkbox' name='".$ref."'";
-								if (array_key_exists($ref, $val)) {
+								echo "<td><input type='checkbox' name='".$ref_cat."'";
+								if (in_array($ref_cat, $val)) {
 									echo " checked";
 								}
 								echo " ></tr>";
@@ -43,16 +43,16 @@ if (file_exists("private/passwd")) {
 					}
 					echo "<td><input type='submit' name='submit' value='OK' method='POST' /></td>";
 					echo "<td><input type='submit' name='submit' value='DEL' method='POST' /></td>";
-					echo "<td><input type='text' name='ref' value=".$ref." hidden></td></form></tr>";
+					echo "<input type='text' name='ref' value=".$ref_item." hidden></form></tr>";
 				}
 				echo "<tr><form action='add_item.php' method='POST'>";
 				echo "<td><input type='text' name='name' value='' /></td>";
 				echo "<td><input type='text' name='price' value='' /></td>";
 				echo "<td><input type='text' name='number' value='' /></td>";
 				echo "<td><table>";
-				foreach ($tab['cat'] as $cat) {
-					echo "<tr><td>'".$cat."'</td>";
-					echo "<td><input type='checkbox' name='".$cat."'></tr>";
+				foreach ($tab['cat'] as $ref_cat => $name) {
+					echo "<tr><td>'".$name."'</td>";
+					echo "<td><input type='checkbox' name='".$ref_cat."'></tr>";
 				}
 				echo "</table></td>";
 				echo "<td><input type='submit' name='submit' value='OK' method='POST' /></td>";
@@ -68,7 +68,7 @@ if (file_exists("private/passwd")) {
 				}
 				echo "<tr><form action='add_category.php' method='POST'>";
 				echo "<td><input type='text' name='name' value='' /></td>";
-				echo "<td><input type='submit' name='submit' value='OK' method='POST' /></td></from></tr>";
+				echo "<td><input type='submit' name='submit' value='OK' method='POST' /></td></form></tr>";
 				echo "</table>";
 				echo "</div>";
 				admin_right();
