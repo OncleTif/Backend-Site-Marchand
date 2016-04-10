@@ -16,11 +16,11 @@
 	flex-grow: 1;
 }
 
-.window table {
+table {
 	border-collapse: collapse;
 }
 
-.window td {
+td {
 	border: 1px solid black;
 }
 
