@@ -21,7 +21,7 @@ $_SESSION = array();
 		exit;
 	}
 }
-if (!$SESSION["loggued_on_user"] && $_POST["login"] != "" && $_POST["passwd"] != "") {
+if (!$_SESSION["loggued_on_user"] && $_POST["login"] != "" && $_POST["passwd"] != "") {
 	$_SESSION = array_merge($_SESSION, auth($_POST["login"], $_POST["passwd"]));
 }
 if ($_SESSION["loggued_on_user"] && $_SESSION["is_admin"] === 1) {

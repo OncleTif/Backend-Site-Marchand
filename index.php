@@ -5,12 +5,21 @@ include "login_form.php";
 include "get_items.php";
 include "modif_cart.php";
 include "add_to_cart.php";
+include "archive_cart.php";
+include "archive_form.php";
+include "auth.php";
+
+if (!$_SESSION["loggued_on_user"] && $_POST["login"] != "" && $_POST["passwd"] != "") {
+  $_SESSION = array_merge($_SESSION, auth($_POST["login"], $_POST["passwd"]));
+	}
 
 shop_header("Shop Accueil");
 if ($_POST["form"] === "modif_cart")
 modif_cart($_POST);
 else if ($_POST["form"] === "add_to_cart")
 	add_to_cart($_POST);
+else if ($_POST["form"] === "archive_cart")
+	archive_cart($_POST);
 
 
 
@@ -42,11 +51,21 @@ include("shop.php");
 			<div class="login">
 				<a href="create.html">Cr&eacute;er un compte</a>
 				<br /><br />
-				<?php login_form("login.php"); ?>
+				<?php
+if ($_SESSION["loggued_on_user"] != "")
+	echo "<p>Bonjour ". $_SESSION["loggued_on_user"]. "!</p>";
+	else
+				login_form($_SERVER["PHP_SELF"]); ?>
 			<div class="cart">
 				<p>Panier</p>
-				<br /><br />
-				<?php include("print_cart.php");i ?>
+<?php
+				if ($_SESSION["loggued_on_user"] != "")
+{
+archive_form($_SERVER['PHP_SELF']);
+
+}
+				 include("print_cart.php");
+				?>
 			</div>
 			</div>
 		</div>
