@@ -28,6 +28,7 @@ if (is_array($tab))
 	if (file_put_contents("private/passwd", serialize($tab)))
 	{
 		echo "<p>Suppression du compte '".$login."' bien prise en compte</p>";
+		if ($_SESSION["loggued_on_usr"] === $login)
 		$_SESSION = array();
 		}
 	else
