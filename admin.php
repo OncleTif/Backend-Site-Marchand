@@ -5,7 +5,9 @@ shop_header("Shop Administration");
 
 ?>
 <?php admin_left() ?>
-	<div class='window'>
-		commandes
-	</div>
+<div class='window'>
+	<?php
+
+	?>
+</div>
 <?php admin_right() ?>
