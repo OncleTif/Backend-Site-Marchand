@@ -20,11 +20,11 @@ if (file_exists("private/passwd")) {
 				foreach($tab_item as $item) {
 					echo 	"<div><form action='add_item.php' method='POST'>";
 					foreach($item as $key => $val) {
-						if (is_array($val)) {
-							echo "<input type='checkbox' name=".$key." value='category' checked />";
-						} else {
+						// if (is_array($val)) {
+						// 	echo "<input type='checkbox' name=".$key." value='category' checked />";
+						// } else {
 							echo "<input type='text' name=".$key." value=".$val.">";
-						}
+						// }
 					}
 					echo 		"<input type='submit' name='submit' value='OK' method='POST' />
 								<input type='submit' name='submit' value='DEL' method='POST' />
@@ -37,7 +37,7 @@ if (file_exists("private/passwd")) {
 				echo "<input type='text' name='number' value=''>";
 				echo "<input type='text' name='promotion' value=''>";
 				echo "<input type='submit' name='submit' value='OK' method='POST' />";
-				echo "</form></div>"
+				echo "</form></div>";
 				echo "</div>";
 				admin_right();
 			} else {
