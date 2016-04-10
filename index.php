@@ -77,7 +77,7 @@ else
 archive_form($_SERVER['PHP_SELF']);
 }
 				 include("print_cart.php");
-				if ($_SESSION["loggued_on_user"] != "")
+				if ($_SESSION["loggued_on_user"] != "" && count($_SESSION["cart"]["items"]))
 {
 buy_form($_SERVER['PHP_SELF']);
 }
